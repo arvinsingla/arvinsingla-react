@@ -1,0 +1,65 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+.cv {
+  &__tech {
+    &__items {
+      display: flex;
+      flex-wrap: wrap;
+      &__item {
+        padding: 2px 5px;
+        margin: 5px 5px 0 0;
+        background: #efefef;
+        border-radius: 3px;
+        border: 1px solid #ddd;
+
+        &:first-of-type {
+          margin-left: 0;
+        }
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+
+  &__resume {
+    &__item {
+      margin: 0 0 30px 0;
+
+      &__duration {
+        font-style: italic;
+      }
+
+      &__description {
+        ul {
+          list-style: inherit;
+          margin: 10px 0 0 20px;
+          li {
+            padding: 3px 0;
+            &:first-of-type {
+              padding-top: 0;
+            }
+            &:last-of-type {
+              padding-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+
+@media print {
+  .cv {
+    &__resume__item {
+      margin: 0 0 20px 0;
+    }
+    &__page-break {
+      height: 50px;
+      width: 100%;
+      page-break-before: always;
+    }
+  }
+}

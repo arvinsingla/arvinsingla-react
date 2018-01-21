@@ -1,0 +1,19 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+// Footer
+.footer {
+  @include flex(center);
+  text-align: center;
+  color: $color-light-grey;
+  font-size: $font-size-small;
+  margin-bottom: 1rem;
+}
+
+@media print {
+  footer {
+    a {
+      color: $color-light-grey;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+@import '../../styles/variables';
+
+.blog__item {
+  &__title {
+    margin-bottom: 0;
+  }
+  &__date {
+    color: $color-light-grey;
+    font-size: $font-size-small;
+  }
+}
