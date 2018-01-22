@@ -12,6 +12,9 @@
 
 @media print {
   footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
     a {
       color: $color-light-grey;
     }
