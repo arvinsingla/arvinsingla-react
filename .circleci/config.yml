@@ -47,11 +47,11 @@ jobs:
       - *attach_workspace
       - run:
           name: build
-          command: npm run build
+          command: npm run build-js
       - persist_to_workspace:
           root: *workspace_root
           paths:
-            - ./*
+            - ./build
   deploy:
     <<: *container_config
     steps:
