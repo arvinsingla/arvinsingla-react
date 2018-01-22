@@ -23,6 +23,9 @@ jobs:
       - run:
           name: install-dependencies
           command: npm install
+      - run:
+          name: build-css
+          command: npm run build-css
       - save_cache:
           key: dependency-cache-{{ checksum "package.json" }}
           paths:
