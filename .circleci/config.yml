@@ -1,0 +1,78 @@
+version: 2
+
+references:
+  container_config: &container_config
+    docker:
+      - image: circleci/node:8
+    working_directory: /tmp/arvinsingla-react
+
+  workspace_root: &workspace_root
+    /tmp/arvinsingla-react
+
+  attach_workspace: &attach_workspace
+    attach_workspace:
+      at: *workspace_root
+
+jobs:
+  setup:
+    <<: *container_config
+    steps:
+      - checkout
+      - restore_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+      - run:
+          name: install-dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - ./node_modules
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - ./*
+  test:
+    <<: *container_config
+    steps:
+      - *attach_workspace
+      - run:
+          name: test
+          command: npm test
+  build:
+    <<: *container_config
+    steps:
+      - *attach_workspace
+      - run:
+          name: build
+          command: npm run build
+      - persist_to_workspace:
+          root: *workspace_root
+          paths:
+            - ./*
+  deploy:
+    <<: *container_config
+    steps:
+      - *attach_workspace
+      - run:
+      - deploy:
+          name: Push build to surge
+          command: npm run deploy
+
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - setup
+      - test:
+          requires:
+            - setup
+      - build:
+          requires:
+            - test
+      - deploy:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
