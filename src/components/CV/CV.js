@@ -1,5 +1,6 @@
 import React from 'react'
 import './CV.css'
+import skills from './skills.json'
 
 const CV = () => {
   return (
@@ -13,25 +14,9 @@ const CV = () => {
         <h3>Tech Skills</h3>
 
         <div className="cv__tech__items">
-          <div className="cv__tech__items__item">Javascript</div>
-          <div className="cv__tech__items__item">React</div>
-          <div className="cv__tech__items__item">Ember</div>
-          <div className="cv__tech__items__item">AngularJS</div>
-          <div className="cv__tech__items__item">Node</div>
-          <div className="cv__tech__items__item">PHP</div>
-          <div className="cv__tech__items__item">Drupal</div>
-          <div className="cv__tech__items__item">MySql</div>
-          <div className="cv__tech__items__item">HTML5</div>
-          <div className="cv__tech__items__item">CSS3</div>
-          <div className="cv__tech__items__item">SASS</div>
-          <div className="cv__tech__items__item">Grunt</div>
-          <div className="cv__tech__items__item">Gulp</div>
-          <div className="cv__tech__items__item">Webdriver.io</div>
-          <div className="cv__tech__items__item">QUnit</div>
-          <div className="cv__tech__items__item">Jest</div>
-          <div className="cv__tech__items__item">Webpack</div>
-          <div className="cv__tech__items__item">Git</div>
-          <div className="cv__tech__items__item">Docker</div>
+          {skills.map((skill, index) => {
+            return <div key={index} className="cv__tech__items__item">{skill}</div>
+          })}
         </div>
       </div>
 
@@ -39,8 +24,20 @@ const CV = () => {
         <h3>Career History</h3>
 
         <div className="cv__resume__item">
+          <h4>Senior Web Developer @ <a className="color--green" href="http://www.ecobee.com">ecobee</a></h4>
+          <div className="cv__resume__item__duration">Mar 2017 - Present</div>
+          <div className="cv__resume__item__description">
+            <ul>
+              <li>Lead full-stack Javascript developer on greenfield project</li>
+              <li>Built microservice architecture leveraging docker, node, MongoDB, HAPI, and OAuth2</li>
+              <li>Spearheaded initiative for company wide reusable design language for front-end applications</li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="cv__resume__item">
           <h4>Software Engineer @ <a className="color--blue" href="http://www.acquia.com">Acquia</a></h4>
-          <div className="cv__resume__item__duration">Sept 2015 - Present</div>
+          <div className="cv__resume__item__duration">Sept 2015 - Mar 2017</div>
           <div className="cv__resume__item__description">
             <ul>
               <li>Joined the Acquia Cloud UI team building production ready components in vanilla Javascript and AngularJS for Beta launch</li>
@@ -49,6 +46,8 @@ const CV = () => {
             </ul>
           </div>
         </div>
+
+        <div className="cv__page-break print-show"></div>
 
         <div className="cv__resume__item">
           <h4>Web Developer @ <a className="color--orange" href="http://www.myplanet.com">Myplanet</a></h4>
@@ -63,8 +62,6 @@ const CV = () => {
           </div>
         </div>
 
-        <div className="cv__page-break print-show"></div>
-
         <div className="cv__resume__item">
           <h4>Web Developer @ <a className="color--green" href="http://www.freeform.ca">Freeform Solutions</a></h4>
           <div className="cv__resume__item__duration">Nov 2009 - Sept 2011</div>
@@ -78,10 +75,11 @@ const CV = () => {
         </div>
 
         <div className="cv__resume__item">
-          <h4>Freelance Drupal Developer</h4>
+          <h4>Freelance <span className="color--blue">Drupal</span> Developer</h4>
           <div className="cv__resume__item__duration">Jun 2007 - Jun 2013</div>
           <div className="cv__resume__item__description">
             <ul>
+              <li>Acquia certified Drupal developer</li>
               <li>Worked on a number of solo and team development projects</li>
               <li>Focused on providing services to Not-for-proift organizations and small businesses</li>
               <li>Planning, architecting, design, theming, development, implementation, deployment, and training represent the wide range of services I have provided</li>

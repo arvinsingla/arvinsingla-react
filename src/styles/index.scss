@@ -17,6 +17,7 @@ body {
 
 a {
   color: $color-primary;
+  transition: color 250ms;
   text-decoration: none;
 
   &:hover {

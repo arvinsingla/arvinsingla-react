@@ -1,6 +1,7 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { format } from 'date-fns'
+import classNames from 'classnames'
 import { Blog, Content, CV, Home, Footer, Header, Intro } from '../../components'
 import './AppContainer.css'
 
@@ -15,6 +16,7 @@ const JSON_HIJACKING_PREFIX = '])}while(1);</x>';
 
 class AppContainer extends Component {
   state = {
+    isLoaded: false,
     posts: []
   }
 
@@ -34,21 +36,27 @@ class AppContainer extends Component {
           }
         })
         this.setState({
-          posts
+          posts,
+          isLoaded: true
         })
       })
       .catch(() => {
         console.log('Could not fetch medium stories')
+        this.setState({
+          isLoaded: true
+        })
       })
   }
 
   render() {
-    const { posts } = this.state
+    const { posts, isLoaded } = this.state
+    const appClassNames = classNames('app-container', {
+      'app-container--loaded': isLoaded
+    })
     return (
-      <Fragment>
+      <div className={appClassNames}>
         <Header name={name} />
         <Intro />
-
         <Content>
           <Route exact path="/" render={() => {
             return (
@@ -71,9 +79,8 @@ class AppContainer extends Component {
             )
           }} />
         </Content>
-
         <Footer currentYear={currentYear} />
-      </Fragment>
+      </div>
     )
   }
 }
